@@ -70,6 +70,7 @@
     <div style="padding: 10px;">
         <a th:href="@{/alumnos/form}" class="btn btn-success">Nuevo Alumno</a>
     </div>
+    <br>
 
     <table class="table table-primary table-hover table-bordered">
         <thead class="table-light">
@@ -89,7 +90,7 @@
             <td th:text="${alumno.nombres}"></td>
             <td th:text="${alumno.apellidos}"></td>
             <td th:text="${alumno.fechaNacimiento}"></td>
-            <td th:text="${alumno.sexo == 'M' ? 'Masculino' : 'Femenino'}"></td>
+            <td th:text="${alumno.sexo == 'M' ? 'M' : 'F'}"></td>
             <td><a class="btn btn-primary" th:href="@{/alumnos/form/} + ${alumno.codigo}">Editar</a></td>
             <td><a class="btn btn-danger" th:href="@{/alumnos/eliminar/} + ${alumno.codigo}"
                    onclick="return confirm('¿Está seguro que desea eliminar este alumno?');">Eliminar</a></td>

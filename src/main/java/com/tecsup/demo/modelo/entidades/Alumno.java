@@ -10,22 +10,21 @@ import java.time.LocalDate;
 public class Alumno {
     @Id
     @NotNull
-    @Column(name = "chrAluCodigo", length = 10)
+    @Column(name = "chr_alu_codigo", length = 10)
     private String codigo;
 
-    @Column(name = "vchAluNombres", length = 50)
+    @Column(name = "vch_alu_nombres", length = 50)
     @Size(max = 50, message = "Los nombres no deben exceder los 50 caracteres")
     private String nombres;
 
-    @Column(name = "vchAluApellidos", length = 50)
+    @Column(name = "vch_alu_apellidos", length = 50)
     @Size(max = 50, message = "Los apellidos no deben exceder los 50 caracteres")
     private String apellidos;
 
-    // CORREGIDO: Cambié el nombre de la columna para que coincida con la BD original
-    @Column(name = "dtmAluFechaNac")
+    @Column(name = "dtm_alu_fecha_nac")
     private LocalDate fechaNacimiento;
 
-    @Column(name = "chrAluSexo", length = 1)
+    @Column(name = "chr_alu_sexo", length = 1)
     @Size(max = 1, message = "El sexo debe ser un solo caracter")
     private String sexo;
 

@@ -63,8 +63,8 @@
             <div class="col-sm-6">
                 <select th:field="*{sexo}" class="form-control">
                     <option value="">-- Seleccione --</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
                 </select>
                 <small class="form-text text-danger"
                        th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></small>
