@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Listado de Alumnos</title>
+    <title>Listado Alumnos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
@@ -19,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link link-light" th:href="@{/}">Inicio</a>
+                        <a class="nav-link link-light" aria-current="page" th:href="@{/}">Inicio</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -66,19 +65,19 @@
 </header>
 
 <div class="container" style="margin-top:90px;">
-    <h1>Listado de Alumnos</h1>
+    <h1 th:text="${titulo}">Listado de Alumnos</h1>
 
     <div style="padding: 10px;">
-        <p><a th:href="@{/alumnos/form}" class="btn btn-success btn-xs">Crear Alumno</a></p>
+        <a th:href="@{/alumnos/form}" class="btn btn-success">Nuevo Alumno</a>
     </div>
 
     <table class="table table-primary table-hover table-bordered">
-        <thead class="table-light" style="text-align: center;">
-        <tr>
+        <thead class="table-light">
+        <tr style="text-align: center;">
             <th>CÓDIGO</th>
             <th>NOMBRES</th>
             <th>APELLIDOS</th>
-            <th>FECHA NACIMIENTO</th>
+            <th>FECHA NAC.</th>
             <th>SEXO</th>
             <th>EDITAR</th>
             <th>ELIMINAR</th>
@@ -86,18 +85,14 @@
         </thead>
         <tbody style="text-align: center;">
         <tr th:each="alumno : ${alumnos}">
-            <td th:text="${alumno.id}"></td>
+            <td th:text="${alumno.codigo}"></td>
             <td th:text="${alumno.nombres}"></td>
             <td th:text="${alumno.apellidos}"></td>
             <td th:text="${alumno.fechaNacimiento}"></td>
-            <td th:text="${alumno.sexo}"></td>
-            <td>
-                <a class="btn btn-primary btn-xs" th:href="@{/alumnos/form/{id}(id=${alumno.id})}">Editar</a>
-            </td>
-            <td>
-                <a class="btn btn-danger btn-xs" th:href="@{/alumnos/eliminar/{id}(id=${alumno.id})}"
-                   onclick="return confirm('¿Estás seguro que quieres eliminar?');">Eliminar</a>
-            </td>
+            <td th:text="${alumno.sexo == 'M' ? 'Masculino' : 'Femenino'}"></td>
+            <td><a class="btn btn-primary" th:href="@{/alumnos/form/} + ${alumno.codigo}">Editar</a></td>
+            <td><a class="btn btn-danger" th:href="@{/alumnos/eliminar/} + ${alumno.codigo}"
+                   onclick="return confirm('¿Está seguro que desea eliminar este alumno?');">Eliminar</a></td>
         </tr>
         </tbody>
     </table>

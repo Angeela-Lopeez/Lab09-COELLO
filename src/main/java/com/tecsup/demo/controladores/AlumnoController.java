@@ -2,7 +2,6 @@ package com.tecsup.demo.controladores;
 
 import com.tecsup.demo.modelo.entidades.Alumno;
 import com.tecsup.demo.servicios.AlumnoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +9,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import jakarta.validation.Valid;
 import java.util.Map;
 
 @Controller
 @SessionAttributes("alumno")
 @RequestMapping("/alumnos")
 public class AlumnoController {
-
     @Autowired
     private AlumnoService servicio;
 
@@ -35,10 +34,12 @@ public class AlumnoController {
         return "alumnoFormView";
     }
 
-    @GetMapping("/form/{id}")
-    public String editar(@PathVariable("id") String id, Map<String, Object> model) {
-        Alumno alumno = servicio.buscar(id);
-        if (alumno == null) {
+    @GetMapping("/form/{codigo}")
+    public String editar(@PathVariable(value = "codigo") String codigo, Map<String, Object> model) {
+        Alumno alumno = null;
+        if (codigo != null && !codigo.isEmpty()) {
+            alumno = servicio.buscar(codigo);
+        } else {
             return "redirect:/alumnos/listar";
         }
         model.put("alumno", alumno);
@@ -57,10 +58,10 @@ public class AlumnoController {
         return "redirect:/alumnos/listar";
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable("id") String id) {
-        if (id != null && !id.isEmpty()) {
-            servicio.eliminar(id);
+    @GetMapping("/eliminar/{codigo}")
+    public String eliminar(@PathVariable(value = "codigo") String codigo) {
+        if (codigo != null && !codigo.isEmpty()) {
+            servicio.eliminar(codigo);
         }
         return "redirect:/alumnos/listar";
     }

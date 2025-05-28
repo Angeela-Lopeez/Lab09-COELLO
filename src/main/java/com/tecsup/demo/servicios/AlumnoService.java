@@ -4,8 +4,8 @@ import com.tecsup.demo.modelo.entidades.Alumno;
 import java.util.List;
 
 public interface AlumnoService {
-    List<Alumno> listar();
-    void grabar(Alumno alumno);
-    Alumno buscar(String id);
-    void eliminar(String id);
+    public List<Alumno> listar();
+    public void grabar(Alumno alumno);
+    public Alumno buscar(String codigo);
+    public void eliminar(String codigo);
 }

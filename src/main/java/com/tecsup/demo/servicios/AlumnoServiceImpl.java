@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class AlumnoServiceImpl implements AlumnoService {
-
     @Autowired
     private AlumnoRepository dao;
 
@@ -21,20 +20,20 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public void grabar(Alumno alumno) {
         dao.save(alumno);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Alumno buscar(String id) {
-        return dao.findById(id).orElse(null);
+    public Alumno buscar(String codigo) {
+        return dao.findById(codigo).orElse(null);
     }
 
     @Override
-    @Transactional(readOnly = false)
-    public void eliminar(String id) {
-        dao.deleteById(id);
+    @Transactional
+    public void eliminar(String codigo) {
+        dao.deleteById(codigo);
     }
 }

@@ -1,52 +1,52 @@
 package com.tecsup.demo.modelo.entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "alumno")
 public class Alumno {
-
     @Id
+    @NotNull
     @Column(name = "chrAluCodigo", length = 10)
-    private String id;
+    private String codigo;
 
     @Column(name = "vchAluNombres", length = 50)
-    @NotNull
-    @Size(min = 2, max = 50)
+    @Size(max = 50, message = "Los nombres no deben exceder los 50 caracteres")
     private String nombres;
 
     @Column(name = "vchAluApellidos", length = 50)
-    @NotNull
-    @Size(min = 2, max = 50)
+    @Size(max = 50, message = "Los apellidos no deben exceder los 50 caracteres")
     private String apellidos;
 
+    // CORREGIDO: Cambié el nombre de la columna para que coincida con la BD original
     @Column(name = "dtmAluFechaNac")
     private LocalDate fechaNacimiento;
 
     @Column(name = "chrAluSexo", length = 1)
-    @NotNull
+    @Size(max = 1, message = "El sexo debe ser un solo caracter")
     private String sexo;
 
-    public Alumno() {}
+    public Alumno() {
+    }
 
-    public Alumno(String id, String nombres, String apellidos, LocalDate fechaNacimiento, String sexo) {
-        this.id = id;
+    public Alumno(String codigo, String nombres, String apellidos, LocalDate fechaNacimiento, String sexo) {
+        this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
     }
 
-    // Getters y setters
-
-    public String getId() {
-        return id;
+    // Getters y Setters
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombres() {
@@ -84,7 +84,7 @@ public class Alumno {
     @Override
     public String toString() {
         return "Alumno{" +
-                "id='" + id + '\'' +
+                "codigo='" + codigo + '\'' +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
